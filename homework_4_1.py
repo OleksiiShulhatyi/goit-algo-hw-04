@@ -15,4 +15,21 @@ def total_salary(path):
                     continue  # Пропускаємо порожні рядки
                 
                 try:
+                    _, salary_str = line.split(',')
+                    total += int(salary_str)
+                    count += 1
+                except ValueError:
+                    print(f"Пропущено некоректний рядок: {line!r}")
                     
+    except FileNotFoundError:
+        print(f"Файл '{path}' не знайдено.")
+        return (0, 0)
+
+    if count == 0:
+        return (0, 0)
+    
+    return (total, total / count)
+
+if __name__ == "__main__":
+    total, average = total_salary("salary_file.txt")
+    print(f"Загальна сума зарплат: {total}, Середня зарплата: {average}")
